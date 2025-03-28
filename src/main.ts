@@ -1,7 +1,7 @@
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { list_components, create_component, update_component } from '../storyblok';
+import { list_components, create_component, update_component } from './storyblok';
 import * as dotenv from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
