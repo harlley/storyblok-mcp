@@ -24,19 +24,31 @@ describe('list_components', () => {
     ]
 
     ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      json: () => Promise.resolve({ components: mockComponents })
+      ok: true,
+      json: () => Promise.resolve({ components: mockComponents }),
+      text: () => Promise.resolve('mock error text')
     })
 
     const result = await list_components()
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.storyblok.com/v1/spaces/test-space-id/components',
+      `https://mapi.storyblok.com/v1/spaces/test-space-id/components`,
       {
         headers: {
-          Authorization: 'Bearer test-api-key'
+          "Authorization": 'test-api-key'
         }
       }
     )
     expect(result).toEqual(mockComponents)
+  })
+
+  it('should handle API errors', async () => {
+    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      status: 401,
+      text: () => Promise.resolve('Unauthorized')
+    })
+
+    await expect(list_components()).rejects.toThrow('Storyblok API error: 401 Unauthorized')
   })
 }) 
