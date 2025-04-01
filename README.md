@@ -87,4 +87,33 @@ npm run dev
 Run tests:
 ```bash
 npm test
-``` 
+```
+
+## Cursor MCP Setup
+
+To use this MCP in Cursor, you need to configure it in your Cursor MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "Storyblok MCP": {
+      "command": "npx",
+      "args": [
+        "tsx",
+        "/path/to/your/storyblok-mcp/src/main.ts"
+      ],
+      "env": {
+        "STORYBLOK_SPACE_ID": "your_space_id",
+        "STORYBLOK_API_KEY": "your_api_key"
+      }
+    }
+  }
+}
+```
+
+Replace:
+- `/path/to/your/storyblok-mcp` with the actual path where you cloned this repository
+- `your_space_id` with your Storyblok space ID
+- `your_api_key` with your Storyblok API key
+
+After saving the configuration, restart Cursor for the changes to take effect. You can then use natural language commands to manage your Storyblok components directly from Cursor. 

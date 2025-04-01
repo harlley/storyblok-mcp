@@ -7,7 +7,11 @@
     "start": "npx tsx src/main.ts",
     "dev": "npx tsx watch src/main.ts",
     "inspect": "npx tsx src/main.ts --inspect",
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "jest src/tests/unit",
+    "test:integration": "jest src/tests/integration",
+    "test:all": "jest src/tests/unit src/tests/integration",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
