@@ -14,9 +14,7 @@ export const listComponents = async (): Promise<StoryblokComponent[]> => {
   const headers = createHeaders(apiKey);
 
   const response = await fetch(url, { headers });
-  const data = await handleResponse<{ components: StoryblokComponent[] }>(
-    response
-  );
+  const data = await handleResponse<{ components: StoryblokComponent[] }>(response);
   return data.components;
 };
 

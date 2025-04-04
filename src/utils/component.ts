@@ -18,16 +18,12 @@ export type ParsedDescription = {
   schemaDescription: string;
 };
 
-export const parseComponentDescription = (
-  description: string
-): ParsedDescription => {
+export const parseComponentDescription = (description: string): ParsedDescription => {
   const displayMatch = description.match(/^display:(.+?)(?:\n|$)/);
   const displayName = displayMatch ? displayMatch[1]?.trim() : undefined;
 
   const schemaMatch = description.match(/schema:([\s\S]+)$/);
-  const schemaDescription = schemaMatch
-    ? schemaMatch[1]?.trim() ?? description
-    : description;
+  const schemaDescription = schemaMatch ? (schemaMatch[1]?.trim() ?? description) : description;
 
   return { displayName, schemaDescription };
 };
@@ -42,15 +38,13 @@ export const generateComponentName = (
     .replace(/^_+|_+$/g, "");
 };
 
-export const generateSchemaFromDescription = (
-  description: string
-): ComponentSchema => {
+export const generateSchemaFromDescription = (description: string): ComponentSchema => {
   const schema: ComponentSchema = {};
   const fieldPattern = /(\w+)\s*\((\w+)\)/g;
   let match: RegExpExecArray | null;
 
   while ((match = fieldPattern.exec(description)) !== null) {
-    const [_, fieldName, fieldType] = match;
+    const [, fieldName, fieldType] = match;
     if (fieldType && fieldName && fieldType in FIELD_TYPES) {
       const type = FIELD_TYPES[fieldType] as FieldType;
       schema[fieldName] = { type };

@@ -3,13 +3,8 @@ import path from "path";
 
 const setupTestEnv = () => {
   // For integration tests, we want to use the real .env file
-  const isIntegrationTest = process.argv.some((arg) =>
-    arg.includes("integration")
-  );
-  const envFile =
-    !isIntegrationTest && process.env["NODE_ENV"] === "test"
-      ? ".env.test"
-      : ".env";
+  const isIntegrationTest = process.argv.some((arg) => arg.includes("integration"));
+  const envFile = !isIntegrationTest && process.env["NODE_ENV"] === "test" ? ".env.test" : ".env";
 
   config({
     path: path.resolve(process.cwd(), envFile),
@@ -17,9 +12,7 @@ const setupTestEnv = () => {
 
   // Validate required environment variables
   const requiredEnvVars = ["STORYBLOK_SPACE_ID", "STORYBLOK_API_KEY"];
-  const missingEnvVars = requiredEnvVars.filter(
-    (envVar) => !process.env[envVar]
-  );
+  const missingEnvVars = requiredEnvVars.filter((envVar) => !process.env[envVar]);
 
   if (missingEnvVars.length > 0) {
     throw new Error(

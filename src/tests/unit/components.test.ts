@@ -32,7 +32,7 @@ describe("listComponents", () => {
     const result = await listComponents();
 
     expect(global.fetch).toHaveBeenCalledWith(
-      `https://mapi.storyblok.com/v1/spaces/test-space-id/components`,
+      "https://mapi.storyblok.com/v1/spaces/test-space-id/components",
       {
         headers: {
           Authorization: "test-api-key",
@@ -50,8 +50,6 @@ describe("listComponents", () => {
       text: () => Promise.resolve("Unauthorized"),
     });
 
-    await expect(listComponents()).rejects.toThrow(
-      "Storyblok API error: 401 Unauthorized"
-    );
+    await expect(listComponents()).rejects.toThrow("Storyblok API error: 401 Unauthorized");
   });
 });

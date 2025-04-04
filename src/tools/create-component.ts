@@ -8,15 +8,11 @@ import {
 import { handleError } from "../utils/error";
 
 export const createComponentSchema = {
-  description: z
-    .string()
-    .describe("Description of the component you want to create"),
+  description: z.string().describe("Description of the component you want to create"),
   name: z
     .string()
     .optional()
-    .describe(
-      "Optional component name. If not provided, will be generated from the description"
-    ),
+    .describe("Optional component name. If not provided, will be generated from the description"),
 };
 
 type CreateComponentParams = z.infer<z.ZodObject<typeof createComponentSchema>>;
@@ -24,13 +20,17 @@ type CreateComponentParams = z.infer<z.ZodObject<typeof createComponentSchema>>;
 export const createComponentTool = {
   name: "create_component",
   schema: createComponentSchema,
-  handler: async (params: CreateComponentParams, _extra: unknown) => {
+  handler: async (
+    params: CreateComponentParams
+  ): Promise<{
+    content: Array<{
+      type: "text";
+      text: string;
+    }>;
+  }> => {
     try {
-      const { displayName, schemaDescription } = parseComponentDescription(
-        params.description
-      );
-      const componentName =
-        params.name || generateComponentName(displayName, schemaDescription);
+      const { displayName, schemaDescription } = parseComponentDescription(params.description);
+      const componentName = params.name || generateComponentName(displayName, schemaDescription);
       const schema = generateSchemaFromDescription(schemaDescription);
 
       const result = await createComponent(componentName, schema, {

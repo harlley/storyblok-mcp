@@ -4,7 +4,12 @@ import { handleError } from "../utils/error";
 export const listComponentsTool = {
   name: "list_components",
   schema: {},
-  handler: async (_args: Record<string, never>, _extra: unknown) => {
+  handler: async (): Promise<{
+    content: Array<{
+      type: "text";
+      text: string;
+    }>;
+  }> => {
     try {
       const components = await listComponents();
       return {

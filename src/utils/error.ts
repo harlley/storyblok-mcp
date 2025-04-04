@@ -10,8 +10,7 @@ type McpResponse = {
 };
 
 export const handleError = (error: unknown): McpResponse => {
-  const errorMessage =
-    error instanceof Error ? error.message : "Unknown error occurred";
+  const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
   return {
     content: [
       {
