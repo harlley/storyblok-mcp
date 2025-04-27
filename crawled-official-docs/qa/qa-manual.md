@@ -1,0 +1,1 @@
+- [x] 01-getting-started.md only shows region-specific base URLs for the European Union. Other available regions listed in the tabs are not present.
