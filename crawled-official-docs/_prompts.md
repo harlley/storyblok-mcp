@@ -144,7 +144,7 @@ The goal of this project is to be a Storyblok Management Typescript SDK. It will
         - Verify all formatting is consistent
         - Check that all images and assets are properly referenced
 
-   - Create a QA report for each crawled section with:
+ - Create a QA report for each crawled section in a separate file inside the `qa` directory, named as `qa/XX-section-qa.md` (e.g., `qa/04-tags-qa.md`).
      ```markdown
      ## QA Report for [Section Name]
      
@@ -220,3 +220,11 @@ Continue crawling the Components section of the Storyblok Management API docs us
 
 This is the page:
 https://www.storyblok.com/docs/api/management/components/
+
+## Prompt 4
+
+Continue crawling the Tags section of the Storyblok Management API docs using Playwright MCP. Save all the content, including subsections, in a single file named `04-tags.md`.
+
+This is the page:
+https://www.storyblok.com/docs/api/management/tags/
+
